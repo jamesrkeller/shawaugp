@@ -212,7 +212,7 @@ namespace nothinbutdotnetprep.specs
 
                 var results = sut.all_movies().all_items_matching(criteria);
 
-                results.ShouldContainOnly(cars, a_bugs_life);
+				results.ShouldContainOnly(cars, a_bugs_life, pirates_of_the_carribean);
             };
 
             It should_be_able_to_find_all_movies_not_published_by_pixar = () =>
