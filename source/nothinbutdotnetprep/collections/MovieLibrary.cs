@@ -95,13 +95,6 @@ namespace nothinbutdotnetprep.collections
 			return Find(m => Genre.action == m.genre);
 		}
 
-		public IEnumerable<Movie> Find(Predicate<Movie> spec)
-		{
-			foreach (Movie movie in movies)
-				if (spec(movie))
-					yield return movie;
-		}
-
 		public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
 		{
 			return SortMovies((x, y) => y.date_published.CompareTo(x.date_published));
@@ -110,6 +103,13 @@ namespace nothinbutdotnetprep.collections
 		public IEnumerable<Movie> sort_all_movies_by_date_published_ascending()
 		{
 			return SortMovies((x, y) => x.date_published.CompareTo(y.date_published));
+		}
+
+		private IEnumerable<Movie> Find(Predicate<Movie> spec)
+		{
+			foreach (var movie in movies)
+				if (spec(movie))
+					yield return movie;
 		}
 
 		private IEnumerable<Movie> SortMovies(Func<Movie, Movie, int> comparisonStrategy)
