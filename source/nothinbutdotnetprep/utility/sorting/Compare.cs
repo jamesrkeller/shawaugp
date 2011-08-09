@@ -18,11 +18,13 @@ namespace nothinbutdotnetprep.utility.sorting
         }
 
         public static ComparerBuilder<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor, params PropertyType[] order)
-		{
-        	IList<PropertyType> list = order;
-        	Func<ItemToSort, int> indexAccessor = item => list.IndexOf(accessor(item));
-
-			return new ComparerBuilder<ItemToSort>(new ItemComparer<ItemToSort, int>(indexAccessor));
+        {
+        	return by(accessor, order);
         }
+
+		public static ComparerBuilder<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor, IList<PropertyType> order)
+		{
+			return by(item => order.IndexOf(accessor(item)));
+		}
     }
 }
